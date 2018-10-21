@@ -17,9 +17,6 @@
                 '-std=c++11',
                 '-stdlib=libc++',
                 '-fexceptions'
-              ],
-              'OTHER_LDFLAGS': [
-                "-Wl,-rpath,@loader_path"
               ]
             },
             "link_settings": {
@@ -36,9 +33,6 @@
                 "link_settings": {
                   "libraries": [
                     "<@(module_root_dir)/Porcupine/lib/raspberry-pi/cortex-a53/libpv_porcupine.a"
-                  ],
-                  "ldflags": [
-                    "-Wl,-rpath,'$$ORIGIN'"
                   ]
                 }
               }],
@@ -46,9 +40,6 @@
                 "link_settings": {
                   "libraries": [
                     "<@(module_root_dir)/Porcupine/lib/linux/i386/libpv_porcupine.a"
-                  ],
-                  "ldflags": [
-                    "-Wl,-rpath,'$$ORIGIN'"
                   ]
                 }
               }],
@@ -56,9 +47,6 @@
                 "link_settings": {
                   "libraries": [
                     "<@(module_root_dir)/Porcupine/lib/linux/x86_64/libpv_porcupine.a"
-                  ],
-                  "ldflags": [
-                    "-Wl,-rpath,'$$ORIGIN'"
                   ]
                 }
               }]

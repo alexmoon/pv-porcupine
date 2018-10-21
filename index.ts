@@ -153,7 +153,7 @@ export class PorcupineStream extends Writable {
         callback();
     }
 
-    public _destroy(err: Error | undefined, callback: (err?: Error) => void): void {
+    public _destroy(err: Error | null, callback: (err: Error | null) => void): void {
         this.porcupine.destroy();
         callback(err);
     }
