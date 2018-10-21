@@ -26,9 +26,9 @@
     "Porcupine/resources/keyword_files/**/*"
   ],
   "scripts": {
-    "prepublish": "rm index.js index.d.ts && tsc --pretty --declaration",
+    "prepublishOnly": "rm -f index.js index.d.ts && tsc --pretty --declaration",
     "install": "node-gyp rebuild",
-    "build": "rm index.js index.d.ts && tsc --pretty --declaration",
+    "build": "rm -f index.js index.d.ts && tsc --pretty --declaration",
     "lint": "tslint -c tslint.json -p tsconfig.json -e node_modules",
     "clean": "rm -rf index.js index.d.ts build yarn-error.log"
   }

@@ -28,6 +28,42 @@
               ]
             }
           },
+        ],
+        [
+          'OS=="linux"', {
+            "conditions": [
+              ['target_arch=="arm"', {
+                "link_settings": {
+                  "libraries": [
+                    "<@(module_root_dir)/Porcupine/lib/raspberry-pi/cortex-a53/libpv_porcupine.a"
+                  ],
+                  "ldflags": [
+                    "-Wl,-rpath,'$$ORIGIN'"
+                  ]
+                }
+              }],
+              ['target_arch=="ia32"', {
+                "link_settings": {
+                  "libraries": [
+                    "<@(module_root_dir)/Porcupine/lib/linux/i386/libpv_porcupine.a"
+                  ],
+                  "ldflags": [
+                    "-Wl,-rpath,'$$ORIGIN'"
+                  ]
+                }
+              }],
+              ['target_arch=="x64"', {
+                "link_settings": {
+                  "libraries": [
+                    "<@(module_root_dir)/Porcupine/lib/linux/x86_64/libpv_porcupine.a"
+                  ],
+                  "ldflags": [
+                    "-Wl,-rpath,'$$ORIGIN'"
+                  ]
+                }
+              }]
+            ]
+          }
         ]
       ]
     }
