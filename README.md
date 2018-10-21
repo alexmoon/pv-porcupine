@@ -1,14 +1,16 @@
 # pv-porcupine
 
-A [Node.js](http://nodejs.org/) [addon](http://nodejs.org/api/addons.html) that provides a wrapper around the [Picovoice Porcupine](https://picovoice.ai/) library, enabling an application to record and play audio with cross platform support. With this library, you can create a writable [node.js stream](https://nodejs.org/dist/latest-v8.x/docs/api/stream.html) that can receive data piped from other streams, such as system audio, files and network connections.
+A [Node.js](http://nodejs.org/) [addon](http://nodejs.org/api/addons.html) that provides a wrapper around the [Picovoice Porcupine](https://picovoice.ai/) wake word detection library.
 
-**Note:** This is a server side library. It will not work in a browser.
+**Note:** This is a Node.js library. It will not work in a browser.
 
 ## Installation
 
-Install [Node.js](http://nodejs.org/) for your platform. This software has been developed against the long term stable (LTS) release. For ease of installation with other node packages, this package includes a copy of the dependent Porcupine library and so has no prerequisites.
+Install [Node.js](http://nodejs.org/) for your platform. This software has been developed against the long term stable (LTS) release. For ease of installation with other node packages, this package includes a copy of the dependent Porcupine library and so has no prerequisites. Build rules are defined for Mac and Linux platforms. Windows is not supported.
 
-`pv-porcupine` is designed to be `require`d or `import`ed to use from your own application to provide async processing. For example:
+**Important:** Before using the library you will need to download or generate a keyword file. A number of pre-generated keyword files are available in the [Porcupine repository](https://github.com/picovoice/Porcupine), along with a tool to generate your own keywords.
+
+Install the package with:
 
     npm install --save pv-porcupine
 
@@ -49,7 +51,7 @@ An example of the output is:
 ```javascript
 const porcupine = require('pv-porcupine').default;
 
-const detector = new porcupine.Porcupine('node_modules/pv-porcupine/Porcupine/lib/common/porcupine_params.pv', 'Porcupine/resources/keyword_files/alexa_mac.ppn');
+const detector = new porcupine.Porcupine('node_modules/pv-porcupine/Porcupine/lib/common/porcupine_params.pv', 'path/to/keyword.ppn');
 
 const buffer = Buffer.alloc(2 * porcupine.frameLength());
 // Fill the buffer with audio data...
@@ -67,7 +69,7 @@ const fs = require('fs');
 
 const detector = new PorcupineStream({
     modelFilePath: 'node_modules/pv-porcupine/Porcupine/lib/common/porcupine_params.pv',
-    keywords: 'Porcupine/resources/keyword_files/alexa_mac.ppn'
+    keywords: 'path/to/keyword.ppn'
 });
 
 detector.on('keyword', (chunk, keyword) => {
@@ -76,6 +78,10 @@ detector.on('keyword', (chunk, keyword) => {
 
 fs.createReadStream('path/to/raw/audio/file').pipe(detector);
 ```
+
+## Development
+
+The Picovoice Porcupine libraries are included as a git submodule of this repository. When cloning the repository use `git clone --recurse-submodules` to get the Porcupine libraries in addition to this Node.js wrapper. If you have cloned this repository without the submodule, you can update the libraries by changing to the Porcupine subdirectory and using `git update --init`.
 
 ## License
 
